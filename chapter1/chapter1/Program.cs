@@ -35,19 +35,38 @@ namespace chapter1
             }
             Console.WriteLine(" OUI unique");
         }
-        
-        static char* reverseCstring(char *s)
+
+        static char* reverseCstring(char* s)
         {
-            
+            char* right = s;
+            char* left = s;
+            char tmp;
+
+
+            while (*right != '\0')
+                right++;
+
+            while (left < right)
+            {
+                tmp = *left;
+                *left = *right;
+                *right = tmp;
+
+                left++;
+                right--;
+
+            }
+
+
             return s;
         }
-        
+
         static String removeDup(String s)
         {
             int bitArray = 0;
             for (int i = 0; i < s.Length; i++)
             {
-                int unicodeValue = s[i] -97;
+                int unicodeValue = s[i] - 97;
                 int shifted = 0;
                 shifted = 1 << unicodeValue;
                 if ((bitArray & shifted) != 0)
@@ -60,7 +79,7 @@ namespace chapter1
                     {
                         s = s.Substring(0, i) + s.Substring(i + 1);
                         i--;
-                        
+
                     }
 
                 }
@@ -70,18 +89,96 @@ namespace chapter1
                 }
 
             }
-                return s;
+            return s;
+        }
+
+        static void anagrams(String s1, String s2)
+        {
+            if (s1.Length != s2.Length)
+            {
+                Console.WriteLine("Pas anagram");
+                return;
+            }
+
+            foreach (char c in s1)
+            {
+                s1 = s1.Replace("" + c, "");
+                s2 = s2.Replace("" + c, "");
+            }
+            if (s1.Length == 0 && s2.Length == 0)
+            {
+                Console.WriteLine("Anagram");
+            }
+            else
+            {
+
+                Console.WriteLine("Nope!");
+            }
+
+
+        }
+        static void replaceSpace(String s)
+        {
+
+        }
+
+        static void rotateGrid(char[][] grid, int N)
+        {
+
+            printGrid(grid, N);
+            int nbInner = (int)Math.Ceiling((Convert.ToDecimal(N) / 2));
+            for (int i = 0; i < nbInner; i++)
+            {
+                for (int j = 0; j < N - i; j++)
+                {
+                    int floor = i;
+                    int top = (N - 1) - i;
+
+                    char t1 = grid[j + i][i];
+                    char t2 = grid[floor][j + i ];
+                    char t3 = grid[top - j][ top ];
+                    char t4 = grid[floor][ top - j ];
+
+
+                    grid[j + i][i] = t4;
+                    grid[i][j + i] = t1;
+                    grid[top - j][top] = t2;
+                    grid[floor][top - j] = t3;
+
+                }
+            }
+            Console.WriteLine();
+            printGrid(grid, N);
+
+        }
+        static void printGrid(char[][] grid, int N)
+        {  
+            for(int i=0 ; i < N ; i++){
+                for (int j = 0; j < N; j++)
+                {
+                    Console.Write(string.Format("{0} ", grid[i][j]));
+                }
+                Console.Write(Environment.NewLine );
+            }
         }
 
         static void Main(string[] args)
         {
+            char[][] grid = {new char[] {'a','b','c'},
+                       new char[] {'d','e','f'},
+                       new char[] {'g','h','i'}};
 
-            string s = "abbcccccccffded";
-          
-            String cleaned = removeDup(s);
-            Console.WriteLine(cleaned);
+            rotateGrid(grid, 3);
+            //reverseCstring(ref cstring);
+            //Console.WriteLine((new string(t)));
+            //string s = "abbcccccccffded";
+
+           // anagrams("silent", "listen");
+           // anagrams("listena", "silenta");
+            //  String cleaned = removeDup(s);
+            // Console.WriteLine(cleaned);
             Console.Read();
-           
+
         }
     }
 }
