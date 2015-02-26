@@ -134,16 +134,16 @@ namespace chapter1
                     int floor = i;
                     int top = (N - 1) - i;
 
-                    char t1 = grid[j + i][i];
-                    char t2 = grid[floor][j + i ];
-                    char t3 = grid[top - j][ top ];
-                    char t4 = grid[floor][ top - j ];
+                    char t1 = grid[i][i + j];
+                    char t2 = grid[j + i][ top ];
+                    char t3 = grid[top ][ top - j ];
+                    char t4 = grid[top - j][ i];
 
 
-                    grid[j + i][i] = t4;
-                    grid[i][j + i] = t1;
-                    grid[top - j][top] = t2;
-                    grid[floor][top - j] = t3;
+                    grid[i][i + j] = t2;
+                    grid[j + i][ top ] = t3;
+                    grid[top ][ top - j ] = t4;
+                     grid[top - j][ i]= t1;
 
                 }
             }
@@ -165,8 +165,8 @@ namespace chapter1
         static void Main(string[] args)
         {
             char[][] grid = {new char[] {'a','b','c'},
-                       new char[] {'d','e','f'},
-                       new char[] {'g','h','i'}};
+                             new char[] {'d','e','f'},
+                             new char[] {'g','h','i'}};
 
             rotateGrid(grid, 3);
             //reverseCstring(ref cstring);
