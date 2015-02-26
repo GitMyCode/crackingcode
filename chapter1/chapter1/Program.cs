@@ -175,7 +175,7 @@ namespace chapter1
             {
                 for (int j = 0; j < grid.GetLength(1); j++)
                 {
-                    if (grid[i, j] == 0 )
+                    if (grid[i, j] == 0)
                     {
                         for (int r = 0; r < grid2.GetLength(0); r++)
                         {
@@ -209,6 +209,21 @@ namespace chapter1
             }
         }
 
+        /* Reponse du livre :( */
+        static void isRotation(string s1, string s2)
+        {
+            if (s1.Length == s2.Length)
+            {
+                string s1s1 = s1 + s1;
+                if (s1s1.Contains(s2))
+                {
+                    Console.WriteLine("Est une rotation!");
+                    return;
+                }
+            }
+            Console.WriteLine("N'est pas une rotation");
+        }
+
 
 
         static void Main(string[] args)
@@ -220,9 +235,13 @@ namespace chapter1
 
             //rotateGrid(grid, 4);
 
-            int[,] test = new int[,] { { 1, 4, 5, 6, 2 }, { 3, 0, 1, 1, 4 }, { 5, 5, 5, 5, 6 }, { 0, 7, 7, 7, 8 } };
-            Console.WriteLine("Line : {0}, Col: {1}, nbElem: {2}", test.Rank, test.GetLength(0), test.Length);
-            setEmptyCrossInGrid(test);
+            //int[,] test = new int[,] { { 1, 4, 5, 6, 2 }, { 3, 0, 1, 1, 4 }, { 5, 5, 5, 5, 6 }, { 0, 7, 7, 7, 8 } };
+            //setEmptyCrossInGrid(test);
+
+
+            string s1 = "waterbottle";
+            string s2 = "erbottlewat";
+            isRotation(s1, s2);
 
 
             //reverseCstring(ref cstring);
