@@ -129,7 +129,7 @@ namespace chapter1
             int nbInner = (int)Math.Ceiling((Convert.ToDecimal(N) / 2));
             for (int i = 0; i < nbInner; i++)
             {
-                for (int j = 0; j < N - i-1; j++)
+                for (int j = 0; j < N - i - 1; j++)
                 {
                     int floor = i;
                     int top = (N - 1) - i;
@@ -163,13 +163,68 @@ namespace chapter1
             }
         }
 
+
+        static void setEmptyCrossInGrid(int[,] grid)
+        {
+            printGrid2(grid);
+            Console.WriteLine();
+            int[,] grid2 = new int[grid.GetLength(0), grid.GetLength(1)];
+            for (int i = 0; i < grid2.Length; i++) { grid2[i % grid2.GetLength(0), i / grid2.GetLength(0)] = -1; }
+
+            for (int i = 0; i < grid.GetLength(0); i++)
+            {
+                for (int j = 0; j < grid.GetLength(1); j++)
+                {
+                    if (grid[i, j] == 0 )
+                    {
+                        for (int r = 0; r < grid2.GetLength(0); r++)
+                        {
+                            grid2[r, j] = 0;
+                        }
+                        for (int c = 0; c < grid2.GetLength(1); c++)
+                        {
+                            grid2[i, c] = 0;
+                        }
+
+                    }
+                    else if (grid2[i, j] != 0)
+                    {
+
+                        grid2[i, j] = grid[i, j];
+                    }
+
+                }
+            }
+            printGrid2(grid2);
+        }
+        static void printGrid2(int[,] grid)
+        {
+            for (int i = 0; i < grid.GetLength(0); i++)
+            {
+                for (int j = 0; j < grid.GetLength(1); j++)
+                {
+                    Console.Write(string.Format("{0}", grid[i, j]));
+                }
+                Console.Write(Environment.NewLine);
+            }
+        }
+
+
+
         static void Main(string[] args)
         {
-            char[][] grid = {new char[] {'a','b','c'},
-                             new char[] {'d','e','f'},
-                             new char[] {'g','h','i'}};
+            char[][] grid = {new char[] {'a','b','c','d'},
+                             new char[] {'e','f','g','h'},
+                             new char[] {'i','j','k','l'},
+                            new char[] {'m','n','o','p'}};
 
-            rotateGrid(grid, 3);
+            //rotateGrid(grid, 4);
+
+            int[,] test = new int[,] { { 1, 4, 5, 6, 2 }, { 3, 0, 1, 1, 4 }, { 5, 5, 5, 5, 6 }, { 0, 7, 7, 7, 8 } };
+            Console.WriteLine("Line : {0}, Col: {1}, nbElem: {2}", test.Rank, test.GetLength(0), test.Length);
+            setEmptyCrossInGrid(test);
+
+
             //reverseCstring(ref cstring);
             //Console.WriteLine((new string(t)));
             //string s = "abbcccccccffded";
