@@ -129,21 +129,21 @@ namespace chapter1
             int nbInner = (int)Math.Ceiling((Convert.ToDecimal(N) / 2));
             for (int i = 0; i < nbInner; i++)
             {
-                for (int j = 0; j < N - i; j++)
+                for (int j = 0; j < N - i-1; j++)
                 {
                     int floor = i;
                     int top = (N - 1) - i;
 
                     char t1 = grid[i][i + j];
-                    char t2 = grid[j + i][ top ];
-                    char t3 = grid[top ][ top - j ];
-                    char t4 = grid[top - j][ i];
+                    char t2 = grid[j + i][top];
+                    char t3 = grid[top][top - j];
+                    char t4 = grid[top - j][i];
 
 
-                    grid[i][i + j] = t2;
-                    grid[j + i][ top ] = t3;
-                    grid[top ][ top - j ] = t4;
-                     grid[top - j][ i]= t1;
+                    grid[i][i + j] = t4;
+                    grid[j + i][top] = t1;
+                    grid[top][top - j] = t2;
+                    grid[top - j][i] = t3;
 
                 }
             }
@@ -152,13 +152,14 @@ namespace chapter1
 
         }
         static void printGrid(char[][] grid, int N)
-        {  
-            for(int i=0 ; i < N ; i++){
+        {
+            for (int i = 0; i < N; i++)
+            {
                 for (int j = 0; j < N; j++)
                 {
                     Console.Write(string.Format("{0} ", grid[i][j]));
                 }
-                Console.Write(Environment.NewLine );
+                Console.Write(Environment.NewLine);
             }
         }
 
@@ -173,8 +174,8 @@ namespace chapter1
             //Console.WriteLine((new string(t)));
             //string s = "abbcccccccffded";
 
-           // anagrams("silent", "listen");
-           // anagrams("listena", "silenta");
+            // anagrams("silent", "listen");
+            // anagrams("listena", "silenta");
             //  String cleaned = removeDup(s);
             // Console.WriteLine(cleaned);
             Console.Read();
